@@ -1,0 +1,37 @@
+{
+  "editor.lineNumbers": "relative",
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "editor.codeActionsOnSave": {},
+  "github.copilot.enable": {
+    "*": true,
+    "yaml": true,
+    "plaintext": false,
+    "markdown": false
+  },
+  "editor.inlineSuggest.enabled": true,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "vim.vimrc.enable": true,
+  "window.confirmBeforeClose": "always",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.formatOnSave": true,
+  "workbench.editor.enablePreview": false,
+  "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
+  "editor.minimap.enabled": false,
+  // VSCodeVim stuff
+  // mostly from here: https://hoitz.medium.com/improved-vim-setup-in-visual-studio-code-bc579501b80c
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<leader>", "w"],
+      "commands": ["workbench.action.splitEditor"]
+    }
+  ]
+}
