@@ -25,13 +25,21 @@
   "editor.formatOnSave": true,
   "workbench.editor.enablePreview": false,
   "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
-  "editor.minimap.enabled": false,
   // VSCodeVim stuff
   // mostly from here: https://hoitz.medium.com/improved-vim-setup-in-visual-studio-code-bc579501b80c
   "vim.normalModeKeyBindingsNonRecursive": [
     {
-      "before": ["<leader>", "w"],
+      "before": ["<leader>", "W"],
       "commands": ["workbench.action.splitEditor"]
+    },
+    {
+      "before": ["<leader>", "w"],
+      "commands": ["workbench.action.moveEditorToNextGroup"]
+    },
+    {
+      "before": ["<leader>", "q"],
+      "commands": ["workbench.action.moveEditorToPreviousGroup"]
     }
-  ]
+  ],
+  "editor.minimap.enabled": false
 }
