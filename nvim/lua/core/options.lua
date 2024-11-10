@@ -21,3 +21,5 @@ vim.o.splitbelow = true -- Force all horizontal splits to go below current windo
 vim.o.splitright = true -- Force all vertical splits to go to the right of current window (default: false)
 
 vim.o.scrolloff = 4 -- Minimal number of screen lines to keep above and below the cursor (default: 0)
+
+vim.o.winbar = "%f"

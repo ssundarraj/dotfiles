@@ -37,4 +37,5 @@ require("lazy").setup({
 	require("plugins.lsp"),
 	require("plugins.autocomplete"),
 	require("plugins.conform"),
+	require("plugins.treesitter-context"),
 })
