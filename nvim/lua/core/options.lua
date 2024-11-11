@@ -23,3 +23,6 @@ vim.o.splitright = true -- Force all vertical splits to go to the right of curre
 vim.o.scrolloff = 4 -- Minimal number of screen lines to keep above and below the cursor (default: 0)
 
 vim.o.winbar = "%f"
+
+-- recommended for auto-session
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"

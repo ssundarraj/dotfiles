@@ -28,6 +28,9 @@ require("lazy").setup({
 		-- Detect tabstop and shiftwidth automatically
 		"tpope/vim-sleuth",
 	},
+	{
+		"github/copilot.vim",
+	},
 	require("plugins.colortheme"), -- needs config and perhaps remove/replace
 	require("plugins.neotree"), -- needs config
 	require("plugins.bufferline"), -- needs config and perhaps remove/replace
@@ -38,4 +41,5 @@ require("lazy").setup({
 	require("plugins.autocomplete"),
 	require("plugins.conform"),
 	require("plugins.treesitter-context"),
+	require("plugins.auto-session"),
 })

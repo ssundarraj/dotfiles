@@ -80,16 +80,18 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		-- Enable Telescope extensions if they are installed
 		pcall(require("telescope").load_extension, "fzf")
 		pcall(require("telescope").load_extension, "ui-select")
+
+		local pickers = require("telescope.pickers")
+		local finders = require("telescope.finders")
+		local conf = require("telescope.config").values
+		local previewers = require("telescope.previewers")
+
 		local function project_files()
 			local success = pcall(require("telescope.builtin").git_files)
 			if not success then
 				require("telescope.builtin").find_files()
 			end
 		end
-
-		local pickers = require("telescope.pickers")
-		local finders = require("telescope.finders")
-		local conf = require("telescope.config").values
 
 		local changed_files = function()
 			local command = "git diff --name-only origin/dev...HEAD"
@@ -98,7 +100,20 @@ return { -- Fuzzy Finder (files, lsp, etc)
 				.new({}, {
 					prompt_title = "Changed Files",
 					finder = finders.new_oneshot_job(vim.split(command, " ")),
-					previewer = conf.file_previewer({}),
+					--		previewer = conf.file_previewer({}),
+					previewer = previewers.new_termopen_previewer({
+						get_command = function(entry)
+							return {
+								"git",
+								"-c",
+								"core.pager=delta",
+								"-c",
+								"delta.side-by-side=false",
+								"diff",
+								entry.value,
+							}
+						end,
+					}),
 					sorter = conf.file_sorter({}),
 				})
 				:find()
