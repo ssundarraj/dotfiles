@@ -26,3 +26,5 @@ vim.o.winbar = "%f"
 
 -- recommended for auto-session
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+
+vim.o.cursorline = true -- Highlight the screen line of the cursor with CursorLine (default: false)
