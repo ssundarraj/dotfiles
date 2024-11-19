@@ -52,7 +52,7 @@ return { -- Fuzzy Finder (files, lsp, etc)tele
 				path_display = { "smart" },
 				mappings = {
 					i = {
-						["<C-enter>"] = "too_fuzzy_refine",
+						["<C-enter>"] = "to_fuzzy_refine",
 						["<C-j>"] = "move_selection_next",
 						["<C-k>"] = "move_selection_previous",
 						["<C-f>"] = "send_to_qflist",
