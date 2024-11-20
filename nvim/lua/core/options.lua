@@ -28,3 +28,8 @@ vim.o.winbar = "%f"
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 vim.o.cursorline = true -- Highlight the screen line of the cursor with CursorLine (default: false)
+
+-- treesitter folding
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldenable = false -- Don't fold by default
