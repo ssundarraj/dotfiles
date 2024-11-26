@@ -33,3 +33,6 @@ vim.o.cursorline = true -- Highlight the screen line of the cursor with CursorLi
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldenable = false -- Don't fold by default
+
+-- matching more stuff with %
+vim.opt.matchpairs:append("<:>")

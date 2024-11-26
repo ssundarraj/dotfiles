@@ -86,6 +86,8 @@ return { -- Fuzzy Finder (files, lsp, etc)tele
 		local finders = require("telescope.finders")
 		local conf = require("telescope.config").values
 		local previewers = require("telescope.previewers")
+		local from_entry = require("telescope.from_entry")
+		local putils = require("telescope.previewers.utils")
 
 		local function project_files()
 			local success = pcall(require("telescope.builtin").git_files)
@@ -94,27 +96,62 @@ return { -- Fuzzy Finder (files, lsp, etc)tele
 			end
 		end
 
+		local branch_diff = function(opts)
+			return previewers.new_buffer_previewer({
+				title = "Git Branch Diff Preview",
+				get_buffer_by_name = function(_, entry)
+					return entry.value
+				end,
+
+				define_preview = function(self, entry, _)
+					local file_name = entry.value
+					local get_git_status_command = "git status -s -- " .. file_name
+					local git_status = io.popen(get_git_status_command):read("*a")
+					local git_status_short = string.sub(git_status, 1, 1)
+					if git_status_short ~= "" then
+						local p = from_entry.path(entry, true)
+						if p == nil or p == "" then
+							return
+						end
+						conf.buffer_previewer_maker(p, self.state.bufnr, {
+							bufname = self.state.bufname,
+							winid = self.state.winid,
+						})
+					else
+						putils.job_maker(
+							{ "git", "--no-pager", "diff", opts.base_branch .. "..HEAD", "--", file_name },
+							self.state.bufnr,
+							{
+								value = file_name,
+								bufname = self.state.bufname,
+							}
+						)
+						putils.regex_highlighter(self.state.bufnr, "diff")
+					end
+				end,
+			})
+		end
+
 		local changed_files = function()
 			local command = "git diff --name-only origin/dev...HEAD"
-
 			pickers
 				.new({}, {
 					prompt_title = "Changed Files",
 					finder = finders.new_oneshot_job(vim.split(command, " ")),
-					--		previewer = conf.file_previewer({}),
-					previewer = previewers.new_termopen_previewer({
-						get_command = function(entry)
-							return {
-								"git",
-								"-c",
-								"core.pager=delta",
-								"-c",
-								"delta.side-by-side=false",
-								"diff",
-								entry.value,
-							}
-						end,
-					}),
+					previewer = branch_diff({ base_branch = "origin/dev" }),
+					-- previewer = previewers.new_termopen_previewer({
+					-- 	get_command = function(entry)
+					-- 		return {
+					-- 			"git",
+					-- 			"-c",
+					-- 			"core.pager=delta",
+					-- 			"-c",
+					-- 			"delta.side-by-side=false",
+					-- 			"diff",
+					-- 			entry.value,
+					-- 		}
+					-- 	end,
+					-- }),
 					sorter = conf.file_sorter({}),
 				})
 				:find()
