@@ -41,4 +41,5 @@ require("lazy").setup({
 	require("plugins.autocomplete"),
 	require("plugins.conform"),
 	require("plugins.treesitter-context"),
+	require("plugins.fugitive"),
 })
