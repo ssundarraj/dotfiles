@@ -42,4 +42,5 @@ require("lazy").setup({
 	require("plugins.conform"),
 	require("plugins.treesitter-context"),
 	require("plugins.fugitive"),
+	require("plugins.undotree"),
 })
