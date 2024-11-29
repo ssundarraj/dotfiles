@@ -57,6 +57,11 @@ return {
 				-- fill = {},
 			},
 		})
-		vim.keymap.set("n", "<leader>bp", ":BufferLinePick<CR>", { noremap = true, silent = true })
+		vim.keymap.set(
+			"n",
+			"<leader>bp",
+			":BufferLinePick<CR>",
+			{ noremap = true, silent = true, desc = "[B]uffer [P]ick" }
+		)
 	end,
 }

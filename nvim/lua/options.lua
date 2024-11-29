@@ -36,3 +36,6 @@ vim.opt.foldenable = false -- Don't fold by default
 
 -- matching more stuff with %
 vim.opt.matchpairs:append("<:>")
+
+-- show sign column
+vim.opt.signcolumn = "number"
