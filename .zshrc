@@ -112,3 +112,27 @@ alert() {
   # Ring the bell using tput
   tput bel
 }
+
+alias ghd='gh dash'
+alias gcb='git symbolic-ref --short HEAD'
+alias grod='git fetch origin dev && git rebase origin/dev'
+
+# fco - interactive git checkout
+# this one is lit
+fco() {
+  local branches branch previewcmd
+  previewcmd="git --no-pager log -50 --color=always --pretty=format:'%Cgreen%h%Cred %al%Creset %s' {1}"
+  branches=$(git --no-pager branch) &&
+    branch=$(echo "$branches" | fzf +m --preview="$previewcmd") &&
+    git switch $(echo "$branch" | sed "s/.* //")
+}
+
+# fh - fuzzy history
+fh() {
+  local cmd
+  cmd=$(fc -l -n 1 | fzf) &&
+    echo $cmd &&
+    echo &&
+    eval $cmd
+}
+
