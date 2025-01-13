@@ -57,3 +57,8 @@ vim.keymap.set("n", "<leader>fp", function()
 	vim.fn.setreg("+", relative_path)
 	vim.notify("Copied: " .. relative_path)
 end, { desc = "Copy [F]ile [P]ath" })
+
+if vim.fn.has("mac") == 1 then
+	vim.api.nvim_set_keymap("n", "<Esc><BS>", "db", { noremap = true, silent = true })
+	vim.api.nvim_set_keymap("i", "<Esc><BS>", "<C-o>db", { noremap = true, silent = true })
+end
