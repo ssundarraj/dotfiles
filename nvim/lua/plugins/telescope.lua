@@ -18,6 +18,7 @@ return { -- Fuzzy Finder (files, lsp, etc)tele
 			end,
 		},
 		{ "nvim-telescope/telescope-ui-select.nvim" },
+		{ "nvim-telescope/telescope-symbols.nvim" },
 
 		-- Useful for getting pretty icons, but requires a Nerd Font.
 		{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
@@ -50,6 +51,12 @@ return { -- Fuzzy Finder (files, lsp, etc)tele
 			--
 			defaults = {
 				path_display = { "smart" },
+				layout_config = {
+					horizontal = {
+						width = { padding = 5 },
+						height = { padding = 5 },
+					},
+				},
 				mappings = {
 					i = {
 						["<C-enter>"] = "to_fuzzy_refine",
