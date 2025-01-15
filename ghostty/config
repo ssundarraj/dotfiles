@@ -1,0 +1,4 @@
+font-family = "Hack Nerd Font Mono"
+keybind = cmd+backspace=esc:w
+keybind = cmd+backspace=text:\x15
+
