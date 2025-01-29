@@ -1,4 +1,4 @@
-font-family = "Hack Nerd Font Mono"
+font-family = "Meslo LG M DZ"
 keybind = cmd+backspace=esc:w
 keybind = cmd+backspace=text:\x15
 
