@@ -1,13 +1,13 @@
 return {
-	{
-		"folke/tokyonight.nvim",
-		lazy = false,
-		priority = 1000, -- Make sure to load this before all the other start plugins.
-		init = function()
-			-- vim.cmd.colorscheme("tokyonight-night")
-			-- vim.cmd.hi("Comment gui=none")
-		end,
-	},
+	-- {
+	-- 	"folke/tokyonight.nvim",
+	-- 	lazy = false,
+	-- 	priority = 1000, -- Make sure to load this before all the other start plugins.
+	-- 	init = function()
+	-- 		vim.cmd.colorscheme("tokyonight-night")
+	-- 		vim.cmd.hi("Comment gui=none")
+	-- 	end,
+	-- },
 
 	{
 		"rebelot/kanagawa.nvim",
@@ -16,6 +16,7 @@ return {
 		config = function()
 			require("kanagawa").setup({})
 			vim.cmd("colorscheme kanagawa")
+			vim.cmd.colorscheme("kanagawa-dragon")
 		end,
 	},
 }
