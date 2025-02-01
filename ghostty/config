@@ -1,4 +1,6 @@
 font-family = "Meslo LG M DZ"
+cursor-style = block
+shell-integration-features = no-cursor
 keybind = cmd+backspace=esc:w
 keybind = cmd+backspace=text:\x15
 
