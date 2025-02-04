@@ -8,8 +8,6 @@ vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 -- For conciseness
 local opts = { noremap = true, silent = true }
 
-vim.keymap.set({ "n", "v", "i" }, "<esc><esc>", "<cmd>noh<CR>", opts) -- clear search highlights
-
 -- save with ctrl s
 vim.keymap.set("n", "<C-s>", "<cmd> w <CR>", opts)
 
