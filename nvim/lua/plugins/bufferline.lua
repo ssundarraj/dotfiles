@@ -63,5 +63,17 @@ return {
 			":BufferLinePick<CR>",
 			{ noremap = true, silent = true, desc = "[B]uffer [P]ick" }
 		)
+		vim.keymap.set(
+			"n",
+			"b[",
+			":BufferLineCyclePrev<CR>",
+			{ noremap = true, silent = true, desc = "Bufferline cycle next" }
+		)
+		vim.keymap.set(
+			"n",
+			"b]",
+			":BufferLineCycleNext<CR>",
+			{ noremap = true, silent = true, desc = "Bufferline cycle next" }
+		)
 	end,
 }
