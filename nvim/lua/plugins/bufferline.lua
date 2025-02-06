@@ -65,13 +65,13 @@ return {
 		)
 		vim.keymap.set(
 			"n",
-			"b[",
+			"[b",
 			":BufferLineCyclePrev<CR>",
 			{ noremap = true, silent = true, desc = "Bufferline cycle next" }
 		)
 		vim.keymap.set(
 			"n",
-			"b]",
+			"]b",
 			":BufferLineCycleNext<CR>",
 			{ noremap = true, silent = true, desc = "Bufferline cycle next" }
 		)
