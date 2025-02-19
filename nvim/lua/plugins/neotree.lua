@@ -16,6 +16,7 @@ return {
 				visible = true,
 			},
 			window = {
+				width = 50,
 				mappings = {
 					["\\"] = "close_window",
 				},
