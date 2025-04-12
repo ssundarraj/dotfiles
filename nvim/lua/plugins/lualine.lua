@@ -8,12 +8,6 @@ return {
 			end,
 		}
 
-		local filename = {
-			"filename",
-			file_status = true, -- displays file status (readonly status, modified status)
-			path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
-		}
-
 		local hide_in_width = function()
 			return vim.fn.winwidth(0) > 100
 		end
@@ -51,11 +45,9 @@ return {
 			sections = {
 				lualine_a = { mode },
 				lualine_b = { { "branch", cond = hide_in_width } },
-				lualine_c = { filename },
 				lualine_x = {
 					diagnostics,
 					diff,
-					{ "encoding", cond = hide_in_width },
 					{ "filetype", cond = hide_in_width },
 				},
 				lualine_y = { "location" },
@@ -64,7 +56,6 @@ return {
 			inactive_sections = {
 				lualine_a = {},
 				lualine_b = {},
-				lualine_c = { { "filename", path = 6 } },
 				lualine_x = { { "location", padding = 0 } },
 				lualine_y = {},
 				lualine_z = {},

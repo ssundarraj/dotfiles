@@ -181,6 +181,7 @@ return {
 			ts_ls = {
 				init_options = {
 					maxTsServerMemory = 8192,
+					nodePath = "node",
 				},
 			},
 			bashls = {},
