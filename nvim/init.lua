@@ -35,6 +35,28 @@ require("lazy").setup({
 	require("plugins.neotree"), -- needs config
 	require("plugins.bufferline"), -- needs config and perhaps remove/replace
 	require("plugins.lualine"),
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		lazy = true,
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				textobjects = {
+					select = {
+						enable = true,
+						lookahead = true,
+						keymaps = {
+							["aa"] = "@parameter.outer",
+							["ia"] = "@parameter.inner",
+							["af"] = "@function.outer",
+							["if"] = "@function.inner",
+							["ac"] = "@class.outer",
+							["ic"] = "@class.inner",
+						},
+					},
+				},
+			})
+		end,
+	},
 	require("plugins.treesitter"),
 	require("plugins.telescope"),
 	require("plugins.lsp"),
