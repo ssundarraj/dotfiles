@@ -37,7 +37,7 @@ require("lazy").setup({
 	require("plugins.lualine"),
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
-		lazy = true,
+		lazy = false,
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				textobjects = {
