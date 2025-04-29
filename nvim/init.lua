@@ -64,4 +64,5 @@ require("lazy").setup({
 	require("plugins.conform"),
 	require("plugins.fugitive"),
 	require("plugins.undotree"),
+	{ "vuciv/golf" },
 })
