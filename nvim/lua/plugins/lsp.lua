@@ -178,6 +178,7 @@ return {
 					enablePromptUseWorkspaceTsdk = true,
 				},
 			},
+			gopls = {},
 			bashls = {},
 			lua_ls = {
 				-- cmd = {...},
