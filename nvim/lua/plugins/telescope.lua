@@ -164,8 +164,9 @@ return { -- Fuzzy Finder (files, lsp, etc)tele
 				:find()
 		end
 
-		-- See `:help telescope.builtin`
 		local builtin = require("telescope.builtin")
+
+		-- See `:help telescope.builtin`
 		vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 		vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
 		vim.keymap.set("n", "<leader>sf", project_files, { desc = "[S]earch [F]iles" })
@@ -176,7 +177,9 @@ return { -- Fuzzy Finder (files, lsp, etc)tele
 		vim.keymap.set("n", "<leader>scf", changed_files, { desc = "[S]earch [C]hanged [F]iles" })
 		vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
 		vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
-		vim.keymap.set("n", "<leader>so", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+		vim.keymap.set("n", "<leader>so", function()
+			builtin.oldfiles({ only_cwd = true })
+		end, { desc = '[S]earch Recent Files ("." for repeat)' })
 		vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
 		vim.keymap.set("n", "<leader>gsw", builtin.git_branches, { desc = "[G]it [Sw]itch" })
 
