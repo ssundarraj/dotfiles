@@ -38,7 +38,7 @@ vim.opt.foldenable = false -- Don't fold by default
 vim.opt.matchpairs:append("<:>")
 
 -- show sign column
-vim.opt.signcolumn = "number"
+vim.opt.signcolumn = "yes"
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
