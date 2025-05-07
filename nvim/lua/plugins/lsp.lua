@@ -174,7 +174,7 @@ return {
 				-- See https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md
 				init_options = {
 					maxTsServerMemory = 8192,
-					defaultMaximumTruncationLength = 10000,
+					defaultMaximumTruncationLength = 100000,
 					tsdk = "node_modules/typescript/lib",
 					enablePromptUseWorkspaceTsdk = true,
 				},
