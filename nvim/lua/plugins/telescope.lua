@@ -140,25 +140,13 @@ return { -- Fuzzy Finder (files, lsp, etc)tele
 		end
 
 		local changed_files = function()
-			local command = "git diff --name-only origin/dev...HEAD"
+			local default_branch = vim.fn.systemlist("git symbolic-ref --short refs/remotes/origin/HEAD")[1]
+			local command = "git diff --name-only " .. default_branch .. "...HEAD"
 			pickers
 				.new({}, {
 					prompt_title = "Changed Files",
 					finder = finders.new_oneshot_job(vim.split(command, " ")),
 					previewer = branch_diff({ base_branch = "origin/dev" }),
-					-- previewer = previewers.new_termopen_previewer({
-					-- 	get_command = function(entry)
-					-- 		return {
-					-- 			"git",
-					-- 			"-c",
-					-- 			"core.pager=delta",
-					-- 			"-c",
-					-- 			"delta.side-by-side=false",
-					-- 			"diff",
-					-- 			entry.value,
-					-- 		}
-					-- 	end,
-					-- }),
 					sorter = conf.file_sorter({}),
 				})
 				:find()
