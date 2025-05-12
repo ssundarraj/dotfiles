@@ -146,7 +146,7 @@ return { -- Fuzzy Finder (files, lsp, etc)tele
 				.new({}, {
 					prompt_title = "Changed Files",
 					finder = finders.new_oneshot_job(vim.split(command, " ")),
-					previewer = branch_diff({ base_branch = "origin/dev" }),
+					previewer = branch_diff({ base_branch = default_branch }),
 					sorter = conf.file_sorter({}),
 				})
 				:find()
