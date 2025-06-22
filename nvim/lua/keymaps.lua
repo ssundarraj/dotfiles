@@ -63,3 +63,9 @@ if vim.fn.has("mac") == 1 then
 	vim.api.nvim_set_keymap("n", "<Esc><BS>", "db", { noremap = true, silent = true })
 	vim.api.nvim_set_keymap("i", "<Esc><BS>", "<C-o>db", { noremap = true, silent = true })
 end
+
+-- Refresh all buffers
+vim.keymap.set("n", "<leader>r", function()
+	vim.cmd("bufdo e!")
+	vim.notify("All buffers refreshed")
+end, { desc = "Refresh all buffers" })
