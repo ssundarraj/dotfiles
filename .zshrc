@@ -123,14 +123,14 @@ fco() {
   local branches branch previewcmd
   previewcmd="git --no-pager log -50 --color=always --pretty=format:'%Cgreen%h%Cred %al%Creset %s' {1}"
   branches=$(git --no-pager branch) &&
-    branch=$(echo "$branches" | fzf +m --preview="$previewcmd") &&
+    branch=$(echo "$branches" | fzf +m --header "Git Branches" --preview="$previewcmd") &&
     git switch $(echo "$branch" | sed "s/.* //")
 }
 
 # fh - fuzzy history
 fh() {
   local cmd
-  cmd=$(fc -l -n 1 | fzf) &&
+  cmd=$(fc -l -n 1 | fzf --header "History") &&
     echo $cmd &&
     echo &&
     eval $cmd
