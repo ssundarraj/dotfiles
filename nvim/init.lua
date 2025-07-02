@@ -43,4 +43,14 @@ require("lazy").setup({
 	require("plugins.undotree"),
 	require("plugins.git-plugins"),
 	{ "vuciv/golf" },
+	{
+		"tzachar/local-highlight.nvim",
+		config = function()
+			require("local-highlight").setup({
+				animate = {
+					enabled = false,
+				},
+			})
+		end,
+	},
 })

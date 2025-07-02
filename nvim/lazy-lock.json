@@ -14,6 +14,7 @@
   "golf": { "branch": "main", "commit": "abf1bc0c1c4a5482b4a4b36b950b49aaa0f39e69" },
   "kanagawa.nvim": { "branch": "master", "commit": "cc3b68b08e6a0cb6e6bf9944932940091e49bb83" },
   "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
+  "local-highlight.nvim": { "branch": "master", "commit": "272f36f412c0a82c785c01256abf4eda4c1cb11d" },
   "lualine.nvim": { "branch": "master", "commit": "15884cee63a8c205334ab13ab1c891cd4d27101a" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "1a31f824b9cd5bc6f342fc29e9a53b60d74af245" },
   "mason-tool-installer.nvim": { "branch": "main", "commit": "1255518cb067e038a4755f5cb3e980f79b6ab89c" },
