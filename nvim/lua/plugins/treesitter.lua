@@ -45,6 +45,28 @@ return {
 		--    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 	},
 	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		lazy = false,
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				textobjects = {
+					select = {
+						enable = true,
+						lookahead = true,
+						keymaps = {
+							["aa"] = "@parameter.outer",
+							["ia"] = "@parameter.inner",
+							["af"] = "@function.outer",
+							["if"] = "@function.inner",
+							["ac"] = "@class.outer",
+							["ic"] = "@class.inner",
+						},
+					},
+				},
+			})
+		end,
+	},
+	{
 		"nvim-treesitter/nvim-treesitter-context",
 		event = "VeryLazy",
 		opts = { mode = "cursor", max_lines = 0, multiline_threshold = 3 },
