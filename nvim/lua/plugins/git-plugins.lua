@@ -32,19 +32,31 @@ return {
 			local actions = require("telescope.actions")
 			local action_state = require("telescope.actions.state")
 
-			local function git_commits_diffview()
+			local function get_commits()
 				local handle = io.popen("git log --oneline --pretty=format:'%h %s' HEAD -20")
+				if not handle then
+					return {}
+				end
 				local result = handle:read("*a")
 				handle:close()
 
 				local commits = {}
-				for line in result:gmatch("[^\r\n]+") do
-					table.insert(commits, line)
+				if result then
+					for line in result:gmatch("[^\r\n]+") do
+						table.insert(commits, line)
+					end
 				end
+				return commits
+			end
 
+			local function git_commits_diffview()
+				local commits = get_commits()
+				local left_commit = nil
+
+				-- First picker: select left commit
 				pickers
 					.new({}, {
-						prompt_title = "Git Commits (DiffView)",
+						prompt_title = "Select LEFT commit",
 						finder = finders.new_table({
 							results = commits,
 						}),
@@ -54,8 +66,36 @@ return {
 								actions.close(prompt_bufnr)
 								local selection = action_state.get_selected_entry()
 								if selection then
-									local commit_hash = selection.value:match("^(%w+)")
-									vim.cmd("DiffviewOpen " .. commit_hash)
+									left_commit = selection.value:match("^(%w+)")
+
+									-- Second picker: select right commit
+									local right_commits = { "Uncommitted changes", unpack(commits) }
+									pickers
+										.new({}, {
+											prompt_title = "Select RIGHT commit (comparing with " .. left_commit .. ")",
+											finder = finders.new_table({
+												results = right_commits,
+											}),
+											sorter = conf.generic_sorter({}),
+											attach_mappings = function(prompt_bufnr2, map2)
+												actions.select_default:replace(function()
+													actions.close(prompt_bufnr2)
+													local selection2 = action_state.get_selected_entry()
+													if selection2 then
+														if selection2.value:match("^Uncommitted") then
+															vim.cmd("DiffviewOpen " .. left_commit)
+														else
+															local right_commit = selection2.value:match("^(%w+)")
+															vim.cmd(
+																"DiffviewOpen " .. left_commit .. ".." .. right_commit
+															)
+														end
+													end
+												end)
+												return true
+											end,
+										})
+										:find()
 								end
 							end)
 							return true
@@ -67,7 +107,7 @@ return {
 			vim.keymap.set("n", "<leader>do", ":DiffviewOpen<CR>", { desc = "[D]iff [O]pen" })
 			vim.keymap.set("n", "<leader>dc", ":DiffviewClose<CR>", { desc = "[D]iff [C]lose" })
 			vim.keymap.set("n", "<leader>dh", ":DiffviewFileHistory<CR>", { desc = "[D]iff [H]istory" })
-			vim.keymap.set("n", "<leader>dgc", git_commits_diffview, { desc = "[D]iff [V]iew [C]ommits" })
+			vim.keymap.set("n", "<leader>dgc", git_commits_diffview, { desc = "[D]iff [G]it [C]ommits" })
 		end,
 	},
 }
