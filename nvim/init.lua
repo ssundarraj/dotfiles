@@ -41,7 +41,7 @@ require("lazy").setup({
 	require("plugins.autocomplete"),
 	require("plugins.conform"),
 	require("plugins.undotree"),
-	require("plugins.git-plugins"),
+	require("plugins.scm"),
 	{ "vuciv/golf" },
 	{
 		"tzachar/local-highlight.nvim",
