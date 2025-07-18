@@ -107,7 +107,7 @@ return {
 			vim.keymap.set("n", "<leader>do", ":DiffviewOpen<CR>", { desc = "[D]iff [O]pen" })
 			vim.keymap.set("n", "<leader>dc", ":DiffviewClose<CR>", { desc = "[D]iff [C]lose" })
 			vim.keymap.set("n", "<leader>dh", ":DiffviewFileHistory<CR>", { desc = "[D]iff [H]istory" })
-			vim.keymap.set("n", "<leader>dgc", git_commits_diffview, { desc = "[D]iff [G]it [C]ommits" })
+			vim.keymap.set("n", "<leader>dg", git_commits_diffview, { desc = "[D]iff [G]it Commits" })
 		end,
 	},
 }
