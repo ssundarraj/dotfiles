@@ -33,7 +33,7 @@ return {
 			local action_state = require("telescope.actions.state")
 
 			local function get_commits()
-				local handle = io.popen("git log --oneline --pretty=format:'%h %s' HEAD -20")
+				local handle = io.popen("git log --oneline --pretty=format:'%h %s' HEAD -100")
 				if not handle then
 					return {}
 				end
