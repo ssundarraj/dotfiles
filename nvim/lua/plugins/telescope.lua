@@ -62,7 +62,8 @@ return { -- Fuzzy Finder (files, lsp, etc)tele
 						["<C-enter>"] = "to_fuzzy_refine",
 						["<C-j>"] = "move_selection_next",
 						["<C-k>"] = "move_selection_previous",
-						["<C-f>"] = require("telescope.actions").send_to_qflist + require("telescope.actions").open_qflist,
+						["<C-f>"] = require("telescope.actions").send_to_qflist
+							+ require("telescope.actions").open_qflist,
 					},
 				},
 			},
@@ -161,6 +162,7 @@ return { -- Fuzzy Finder (files, lsp, etc)tele
 		vim.keymap.set("n", "<leader>st", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
 		vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
 		vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+		vim.keymap.set("n", "<leader>sq", builtin.quickfix, { desc = "[S]earch [Q]ickfix List" })
 		vim.keymap.set("n", "<leader>sGS", builtin.git_status, { desc = "[S]earch [G]it [S]tatus" })
 		vim.keymap.set("n", "<leader>scf", changed_files, { desc = "[S]earch [C]hanged [F]iles" })
 		vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
