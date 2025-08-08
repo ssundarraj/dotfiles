@@ -62,7 +62,7 @@ return { -- Fuzzy Finder (files, lsp, etc)tele
 						["<C-enter>"] = "to_fuzzy_refine",
 						["<C-j>"] = "move_selection_next",
 						["<C-k>"] = "move_selection_previous",
-						["<C-f>"] = "send_to_qflist",
+						["<C-f>"] = require("telescope.actions").send_to_qflist + require("telescope.actions").open_qflist,
 					},
 				},
 			},
