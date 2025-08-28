@@ -136,3 +136,4 @@ fh() {
     eval $cmd
 }
 
+XGD_CONFIG_HOME=~/.config
