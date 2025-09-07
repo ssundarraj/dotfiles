@@ -23,6 +23,8 @@ vim.opt.rtp:prepend(lazypath)
 --  To update plugins you can run
 --    :Lazy update
 --
+local colortheme = require("plugins.colortheme")
+
 require("lazy").setup({
 	{
 		-- Detect tabstop and shiftwidth automatically
@@ -31,7 +33,7 @@ require("lazy").setup({
 	{
 		"github/copilot.vim",
 	},
-	require("plugins.colortheme"),
+	colortheme.plugins,
 	require("plugins.neotree"), -- needs config
 	require("plugins.bufferline"), -- needs config and perhaps remove/replace
 	require("plugins.lualine"),
@@ -55,4 +57,4 @@ require("lazy").setup({
 	},
 })
 
-vim.cmd.colorscheme("monokai-pro")
+vim.cmd.colorscheme(colortheme.selected_theme)

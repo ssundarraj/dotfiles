@@ -1,4 +1,6 @@
-return {
+local M = {}
+
+M.plugins = {
 	{
 		"folke/tokyonight.nvim",
 		lazy = false,
@@ -25,3 +27,7 @@ return {
 		end,
 	},
 }
+
+M.selected_theme = "monokai-pro"
+
+return M
