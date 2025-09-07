@@ -3,4 +3,5 @@ cursor-style = block
 shell-integration-features = no-cursor
 keybind = cmd+backspace=esc:w
 keybind = cmd+backspace=text:\x15
-theme = "Kanagawa Dragon"
+theme = "Monokai Pro"
+keybind = shift+enter=text:\n

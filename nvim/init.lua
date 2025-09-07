@@ -31,7 +31,7 @@ require("lazy").setup({
 	{
 		"github/copilot.vim",
 	},
-	require("plugins.colortheme"), -- needs config and perhaps remove/replace
+	require("plugins.colortheme"),
 	require("plugins.neotree"), -- needs config
 	require("plugins.bufferline"), -- needs config and perhaps remove/replace
 	require("plugins.lualine"),
@@ -54,3 +54,5 @@ require("lazy").setup({
 		end,
 	},
 })
+
+vim.cmd.colorscheme("monokai-pro")
