@@ -104,10 +104,21 @@ return {
 					:find()
 			end
 
+			local function diff_from_branch_point()
+				local result = vim.fn.systemlist("git symbolic-ref --short refs/remotes/origin/HEAD")
+				if result and result[1] and not result[1]:match("^fatal:") then
+					local default_branch = result[1]:gsub("^origin/", "")
+					vim.cmd("DiffviewOpen origin/" .. default_branch .. "...HEAD")
+				else
+					vim.notify("Could not determine default branch", vim.log.levels.ERROR)
+				end
+			end
+
 			vim.keymap.set("n", "<leader>do", ":DiffviewOpen<CR>", { desc = "[D]iff [O]pen" })
 			vim.keymap.set("n", "<leader>dc", ":DiffviewClose<CR>", { desc = "[D]iff [C]lose" })
 			vim.keymap.set("n", "<leader>dh", ":DiffviewFileHistory<CR>", { desc = "[D]iff [H]istory" })
 			vim.keymap.set("n", "<leader>dg", git_commits_diffview, { desc = "[D]iff [G]it Commits" })
+			vim.keymap.set("n", "<leader>db", diff_from_branch_point, { desc = "[D]iff from [B]ranch point" })
 		end,
 	},
 }
