@@ -9,7 +9,7 @@ return {
 			options = {
 				-- mode = "tabs", -- set to "tabs" to only show tabpages instead
 				themable = true, -- allows highlight groups to be overriden i.e. sets highlights as default
-				numbers = "both", -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
+				-- numbers = "both", -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
 				close_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
 				buffer_close_icon = "✗",
 				close_icon = "✗",
