@@ -39,7 +39,7 @@ vim.keymap.set("v", ">", ">gv", opts)
 -- Keep last yanked when pasting
 vim.keymap.set("v", "p", '"_dP', opts)
 -- leader + y to copy to system clipboard
-vim.keymap.set({ "n", "v" }, "y", '"+y', opts)
+vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', opts)
 
 -- Resize with arrows
 vim.keymap.set("n", "<Up>", ":resize -2<CR>", opts)
