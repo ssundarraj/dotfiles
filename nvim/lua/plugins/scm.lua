@@ -7,6 +7,8 @@ return {
 		config = function()
 			require("gitsigns").setup()
 			vim.keymap.set("n", "<leader>gb", ":Gitsigns blame<CR>", { desc = "[G]it [B]lame" })
+			vim.keymap.set("n", "[h", ":Gitsigns prev_hunk<CR>", { desc = "Prev Hunk" })
+			vim.keymap.set("n", "]h", ":Gitsigns next_hunk<CR>", { desc = "Next Hunk" })
 		end,
 	},
 	{
