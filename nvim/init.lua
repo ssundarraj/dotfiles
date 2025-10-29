@@ -32,6 +32,33 @@ require("lazy").setup({
 	},
 	{
 		"github/copilot.vim",
+		init = function()
+			local cache_file = vim.fn.stdpath("cache") .. "/copilot_node_path"
+			local node_path = nil
+
+			-- Try to read from cache
+			local file = io.open(cache_file, "r")
+			if file then
+				node_path = file:read("*line")
+				file:close()
+			end
+
+			-- If cache doesn't exist or path is invalid, resolve and cache
+			if not node_path or vim.fn.filereadable(node_path) == 0 then
+				node_path = vim.fn.system("source ~/.nvm/nvm.sh && nvm which 22"):gsub("%s+", "")
+				if vim.v.shell_error == 0 and node_path ~= "" then
+					file = io.open(cache_file, "w")
+					if file then
+						file:write(node_path)
+						file:close()
+					end
+				end
+			end
+
+			if node_path and node_path ~= "" then
+				vim.g.copilot_node_command = node_path
+			end
+		end,
 	},
 	colortheme.plugins,
 	require("plugins.neotree"), -- needs config
