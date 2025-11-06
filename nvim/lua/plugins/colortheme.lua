@@ -43,6 +43,6 @@ M.plugins = {
 	},
 }
 
-M.selected_theme = "monokai-pro"
+M.selected_theme = "monokai-pro-machine"
 
 return M
