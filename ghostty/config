@@ -3,5 +3,5 @@ cursor-style = block
 shell-integration-features = no-cursor
 keybind = cmd+backspace=esc:w
 keybind = cmd+backspace=text:\x15
-theme = "Monokai Pro"
+theme = "Monokai Pro Machine"
 keybind = shift+enter=text:\n
