@@ -110,7 +110,7 @@ return {
 				local result = vim.fn.systemlist("git symbolic-ref --short refs/remotes/origin/HEAD")
 				if result and result[1] and not result[1]:match("^fatal:") then
 					local default_branch = result[1]:gsub("^origin/", "")
-					vim.cmd("DiffviewOpen origin/" .. default_branch .. "...HEAD")
+					vim.cmd("DiffviewOpen origin/" .. default_branch)
 				else
 					vim.notify("Could not determine default branch", vim.log.levels.ERROR)
 				end
