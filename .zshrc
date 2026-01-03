@@ -99,6 +99,9 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+unsetopt share_history
+# for Java
+#  export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
 
 
 export PATH="/opt/homebrew/opt/kubernetes-cli/bin:$PATH"
@@ -116,6 +119,7 @@ alert() {
 alias ghd='gh dash'
 alias gcb='git symbolic-ref --short HEAD'
 alias grod='git fetch origin dev && git rebase origin/dev'
+alias ta='tmux attach'
 
 # fco - interactive git checkout
 # this one is lit
@@ -134,6 +138,27 @@ fh() {
     echo $cmd &&
     echo &&
     eval $cmd
+}
+
+# fuzzy tmux attach/switch
+tf() {
+  local sessions session
+  sessions=$(tmux ls | awk -F: '{print $1}') &&
+    session=$(echo "$sessions" | fzf +m) &&
+    if [ -n "$TMUX" ]; then
+      tmux switch-client -t "$session"
+    else
+      tmux attach -t "$session"
+    fi
+}
+
+
+tn() {
+  if [ -n "$TMUX" ]; then
+    tmux new-session -d -s "$1" && tmux switch-client -t "$1"
+  else
+    tmux new-session -s "$1"
+  fi
 }
 
 XGD_CONFIG_HOME=~/.config
