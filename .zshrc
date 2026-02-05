@@ -137,3 +137,50 @@ fh() {
 }
 
 XGD_CONFIG_HOME=~/.config
+
+
+# tmux
+create_tmux_session_if_not_exists() {
+  local session_name=$1
+  local directory=$2
+
+  # Check if directory exists
+  if [ ! -d "$directory" ]; then
+    echo "Warning: Directory $directory does not exist. Skipping session $session_name"
+    return 1
+  fi
+
+  # Check if session already exists
+  if tmux has-session -t "$session_name" 2>/dev/null; then
+    echo "Session '$session_name' already exists. Skipping."
+    return 0
+  fi
+
+  echo "Creating session '$session_name' in $directory"
+  tmux new-session -d -s "$session_name" -c "$directory"
+}
+
+# tmux init 
+ti() {
+  if [ -n "$TMUX" ]; then
+    echo "Already inside a tmux session. Please detach first."
+    exit 1
+  fi
+
+  if ! tmux has-session -t main_development 2>/dev/null; then
+  if [ -d ~/dev/main_development ]; then
+    tmux new-session -d -s main_development -c ~/dev/main_development
+    tmux split-window -h -t main_development:1 -c ~/dev/main_development
+    tmux new-window -t main_development -c ~/dev/main_development
+  fi
+  else
+  echo "Session 'main_development' already exists. Skipping."
+  fi
+
+  # Create other sessions
+  create_tmux_session_if_not_exists "dotfiles" ~/dev/dotfiles
+
+  echo ""
+  read -k 1 -s "?Press any key to attach to main_development..."
+  tmux attach-session -t main_development
+}
