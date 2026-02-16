@@ -209,3 +209,8 @@ ti() {
   read -k 1 -s "?Press any key to attach to main_development..."
   tmux attach-session -t main_development
 }
+
+export EDITOR=nvim
+
+export PATH="$HOME/.local/bin:$PATH"
+
