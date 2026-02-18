@@ -175,10 +175,11 @@ return {
 				init_options = {
 					maxTsServerMemory = 8192,
 					defaultMaximumTruncationLength = 100000,
-					tsdk = "node_modules/typescript/lib",
-					enablePromptUseWorkspaceTsdk = true,
+					-- tsdk = "node_modules/typescript/lib",
+					-- enablePromptUseWorkspaceTsdk = true,
 				},
 			},
+			clangd = {},
 			bashls = {},
 			lua_ls = {
 				-- cmd = {...},
