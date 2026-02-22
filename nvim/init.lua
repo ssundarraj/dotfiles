@@ -71,6 +71,7 @@ require("lazy").setup({
 	require("plugins.conform"),
 	require("plugins.undotree"),
 	require("plugins.scm"),
+	{ "sphamba/smear-cursor.nvim", opts = {} },
 	{ "vuciv/golf" },
 	{
 		"tzachar/local-highlight.nvim",
