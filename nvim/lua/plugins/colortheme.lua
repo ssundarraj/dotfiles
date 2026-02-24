@@ -3,8 +3,7 @@ local M = {}
 M.plugins = {
 	{
 		"folke/tokyonight.nvim",
-		lazy = false,
-		priority = 1000,
+		lazy = true,
 		config = function()
 			require("tokyonight").setup({})
 			vim.cmd.hi("Comment gui=none")
@@ -12,8 +11,7 @@ M.plugins = {
 	},
 	{
 		"rebelot/kanagawa.nvim",
-		lazy = false,
-		priority = 1000,
+		lazy = true,
 		config = function()
 			require("kanagawa").setup({})
 		end,
