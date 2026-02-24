@@ -52,3 +52,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 vim.g.have_nerd_font = true
+
+vim.opt.updatetime = 300
+vim.opt.undofile = true
