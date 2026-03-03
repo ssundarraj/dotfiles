@@ -181,6 +181,7 @@ return {
 			},
 			clangd = {},
 			bashls = {},
+			pyright = {},
 			lua_ls = {
 				-- cmd = {...},
 				-- filetypes = { ...},
