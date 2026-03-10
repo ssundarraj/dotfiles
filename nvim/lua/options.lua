@@ -5,6 +5,7 @@ vim.opt.relativenumber = true -- Set relative numbered lines (default: false)
 
 vim.opt.wrap = false -- Display lines as one long line (default: true)
 vim.opt.linebreak = true -- Companion to wrap, don't split words (default: false)
+vim.opt.textwidth = 100 -- Maximum width of text for formatting with gq (default: 0)
 
 vim.opt.mouse = "a" -- Enable mouse mode (default: '')
 
@@ -48,6 +49,14 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
 	callback = function()
 		vim.highlight.on_yank()
+	end,
+})
+
+-- Enable wrap for markdown files
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "markdown",
+	callback = function()
+		vim.opt_local.wrap = true
 	end,
 })
 
