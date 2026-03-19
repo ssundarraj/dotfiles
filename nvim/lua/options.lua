@@ -64,3 +64,13 @@ vim.g.have_nerd_font = true
 
 vim.opt.updatetime = 300
 vim.opt.undofile = true
+
+vim.opt.autoread = true
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
+	desc = "Auto-reload files when changed externally",
+	callback = function()
+		if vim.fn.getcmdwintype() == "" then
+			vim.cmd("checktime")
+		end
+	end,
+})
