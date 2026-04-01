@@ -61,8 +61,8 @@ require("lazy").setup({
 	-- 	end,
 	-- },
 	colortheme.plugins,
-	require("plugins.neotree"), -- needs config
-	require("plugins.bufferline"), -- needs config and perhaps remove/replace
+	require("plugins.neotree"),
+	require("plugins.bufferline"),
 	require("plugins.lualine"),
 	require("plugins.treesitter"),
 	require("plugins.telescope"),
@@ -71,6 +71,22 @@ require("lazy").setup({
 	require("plugins.conform"),
 	require("plugins.undotree"),
 	require("plugins.scm"),
+	{
+		dir = "/Users/sriram/dev/local-review.nvim", -- https://github.com/ssundarraj/local-review.nvim
+		config = function()
+			require("local_review").setup({
+				keymaps = {
+					comment = "<leader>lc",
+					delete = "<leader>ld",
+					next = "]r",
+					prev = "[r",
+				},
+			})
+			vim.keymap.set("n", "<leader>sl", function()
+				require("local_review.telescope").comments()
+			end, { desc = "[S]earch [L]ocal Review Comments" })
+		end,
+	},
 	{
 		"sphamba/smear-cursor.nvim",
 		opts = { -- Default  Range
@@ -83,7 +99,6 @@ require("lazy").setup({
 			distance_stop_animating = 0.5, -- 0.1      > 0
 		},
 	},
-	{ "vuciv/golf" },
 	{
 		"tzachar/local-highlight.nvim",
 		config = function()
