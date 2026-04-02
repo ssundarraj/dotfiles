@@ -27,7 +27,9 @@ vim.keymap.set("n", "<C-l>", ":wincmd l<CR>", opts)
 -- Tabs
 vim.keymap.set("n", "<leader>to", ":tabnew<CR>", opts) -- open new tab
 vim.keymap.set("n", "<leader>tc", ":tabclose<CR>", opts) -- close current tab
-vim.keymap.set("n", "<leader>ts", ":tab split<CR>", opts) -- split current buffer into new tab
+-- split current buffer into new tab
+-- `e!` resets folds etc. Useful when opening a file from Diffview
+vim.keymap.set("n", "<leader>ts", ":tab split<CR>:e!<CR>", opts)
 
 -- Toggle line wrapping
 vim.keymap.set("n", "<leader>lw", "<cmd>set wrap!<CR>", opts)
