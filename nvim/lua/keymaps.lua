@@ -31,6 +31,22 @@ vim.keymap.set("n", "<leader>tc", ":tabclose<CR>", opts) -- close current tab
 -- `e!` resets folds etc. Useful when opening a file from Diffview
 vim.keymap.set("n", "<leader>ts", ":tab split<CR>:e!<CR>", opts)
 
+-- send current file to adjacent tab as a vsplit
+vim.keymap.set("n", "<leader>t<", function()
+	local file = vim.fn.expand("%")
+	local cursor = vim.api.nvim_win_get_cursor(0)
+	vim.cmd("tabprevious")
+	vim.cmd("vsplit " .. file)
+	vim.api.nvim_win_set_cursor(0, cursor)
+end, opts)
+vim.keymap.set("n", "<leader>t>", function()
+	local file = vim.fn.expand("%")
+	local cursor = vim.api.nvim_win_get_cursor(0)
+	vim.cmd("tabnext")
+	vim.cmd("vsplit " .. file)
+	vim.api.nvim_win_set_cursor(0, cursor)
+end, opts)
+
 -- Toggle line wrapping
 vim.keymap.set("n", "<leader>lw", "<cmd>set wrap!<CR>", opts)
 
