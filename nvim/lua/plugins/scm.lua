@@ -34,6 +34,17 @@ return {
 			local actions = require("telescope.actions")
 			local action_state = require("telescope.actions.state")
 
+			local function close_diffview_if_open()
+				for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+					local buf = vim.api.nvim_win_get_buf(win)
+					local ft = vim.api.nvim_get_option_value("filetype", { buf = buf })
+					if ft:match("^Diffview") then
+						vim.cmd("DiffviewClose")
+						return
+					end
+				end
+			end
+
 			local function get_commits()
 				local handle = io.popen("git log --oneline --pretty=format:'%h %s' HEAD -100")
 				if not handle then
@@ -85,9 +96,11 @@ return {
 													local selection2 = action_state.get_selected_entry()
 													if selection2 then
 														if selection2.value:match("^Uncommitted") then
+															close_diffview_if_open()
 															vim.cmd("DiffviewOpen " .. left_commit)
 														else
 															local right_commit = selection2.value:match("^(%w+)")
+															close_diffview_if_open()
 															vim.cmd(
 																"DiffviewOpen " .. left_commit .. ".." .. right_commit
 															)
@@ -116,11 +129,22 @@ return {
 				end
 			end
 
-			vim.keymap.set("n", "<leader>do", ":DiffviewOpen<CR>", { desc = "[D]iff [O]pen" })
+			vim.keymap.set("n", "<leader>do", function()
+				close_diffview_if_open()
+				vim.cmd("DiffviewOpen")
+			end, { desc = "[D]iff [O]pen" })
 			vim.keymap.set("n", "<leader>dc", ":DiffviewClose<CR>", { desc = "[D]iff [C]lose" })
-			vim.keymap.set("n", "<leader>dh", ":DiffviewFileHistory<CR>", { desc = "[D]iff [H]istory" })
-			vim.keymap.set("n", "<leader>dg", git_commits_diffview, { desc = "[D]iff [G]it Commits" })
-			vim.keymap.set("n", "<leader>db", diff_from_branch_point, { desc = "[D]iff from [B]ranch point" })
+			vim.keymap.set("n", "<leader>dh", function()
+				close_diffview_if_open()
+				vim.cmd("DiffviewFileHistory")
+			end, { desc = "[D]iff [H]istory" })
+			vim.keymap.set("n", "<leader>dg", function()
+				git_commits_diffview()
+			end, { desc = "[D]iff [G]it Commits" })
+			vim.keymap.set("n", "<leader>db", function()
+				close_diffview_if_open()
+				diff_from_branch_point()
+			end, { desc = "[D]iff from [B]ranch point" })
 		end,
 	},
 }
