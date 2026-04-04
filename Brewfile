@@ -1,1 +1,2 @@
-brew "neovim" # 0.11.6
+brew "neovim" # 0.12
+brew "tree-sitter-cli"
