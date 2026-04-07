@@ -33,6 +33,7 @@ return {
 			local conf = require("telescope.config").values
 			local actions = require("telescope.actions")
 			local action_state = require("telescope.actions.state")
+			local entry_display = require("telescope.pickers.entry_display")
 
 			local function close_diffview_if_open()
 				for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
@@ -46,7 +47,7 @@ return {
 			end
 
 			local function get_commits()
-				local handle = io.popen("git log --oneline --pretty=format:'%h %s' HEAD -100")
+				local handle = io.popen("git log --decorate=short --pretty=format:'%h%x1f%d%x1f%s' HEAD -100")
 				if not handle then
 					return {}
 				end
@@ -56,10 +57,78 @@ return {
 				local commits = {}
 				if result then
 					for line in result:gmatch("[^\r\n]+") do
-						table.insert(commits, line)
+						local sha, refs, subject = line:match("^([^%z\31]+)%z?\31([^%z\31]*)%z?\31(.*)$")
+						if sha then
+							refs = refs:gsub("^%s+", ""):gsub("%s+$", "")
+							if refs == "" then
+								refs = nil
+							end
+							table.insert(commits, {
+								sha = sha,
+								refs = refs,
+								subject = subject,
+							})
+						end
 					end
 				end
 				return commits
+			end
+
+			local commit_displayer = entry_display.create({
+				separator = " ",
+				items = {
+					{ width = 8 },
+					{ width = 28 },
+					{ remaining = true },
+				},
+			})
+
+			local function make_uncommitted_entry()
+				return {
+					value = {
+						kind = "uncommitted",
+						label = "Uncommitted changes",
+					},
+					ordinal = "uncommitted changes working tree index",
+					display = function(entry)
+						return commit_displayer({
+							{ "", "TelescopeResultsIdentifier" },
+							{ "[working tree]", "TelescopeResultsComment" },
+							entry.value.label,
+						})
+					end,
+				}
+			end
+
+			local function commits_finder(commits, include_uncommitted)
+				local results = {}
+				if include_uncommitted then
+					table.insert(results, make_uncommitted_entry())
+				end
+				for _, commit in ipairs(commits) do
+					table.insert(results, {
+						value = commit,
+						ordinal = table.concat({
+							commit.sha,
+							commit.refs or "",
+							commit.subject or "",
+						}, " "),
+						display = function(entry)
+							local value = entry.value
+							return commit_displayer({
+								{ value.sha, "TelescopeResultsIdentifier" },
+								{ value.refs or "", "TelescopeResultsComment" },
+								value.subject,
+							})
+						end,
+					})
+				end
+				return finders.new_table({
+					results = results,
+					entry_maker = function(entry)
+						return entry
+					end,
+				})
 			end
 
 			local function git_commits_diffview()
@@ -70,36 +139,31 @@ return {
 				pickers
 					.new({}, {
 						prompt_title = "Select LEFT commit",
-						finder = finders.new_table({
-							results = commits,
-						}),
+						finder = commits_finder(commits, false),
 						sorter = conf.generic_sorter({}),
 						attach_mappings = function(prompt_bufnr, map)
 							actions.select_default:replace(function()
 								actions.close(prompt_bufnr)
 								local selection = action_state.get_selected_entry()
 								if selection then
-									left_commit = selection.value:match("^(%w+)")
+									left_commit = selection.value.sha
 
 									-- Second picker: select right commit
-									local right_commits = { "Uncommitted changes", unpack(commits) }
 									pickers
 										.new({}, {
 											prompt_title = "Select RIGHT commit (comparing with " .. left_commit .. ")",
-											finder = finders.new_table({
-												results = right_commits,
-											}),
+											finder = commits_finder(commits, true),
 											sorter = conf.generic_sorter({}),
 											attach_mappings = function(prompt_bufnr2, map2)
 												actions.select_default:replace(function()
 													actions.close(prompt_bufnr2)
 													local selection2 = action_state.get_selected_entry()
 													if selection2 then
-														if selection2.value:match("^Uncommitted") then
+														if selection2.value.kind == "uncommitted" then
 															close_diffview_if_open()
 															vim.cmd("DiffviewOpen " .. left_commit)
 														else
-															local right_commit = selection2.value:match("^(%w+)")
+															local right_commit = selection2.value.sha
 															close_diffview_if_open()
 															vim.cmd(
 																"DiffviewOpen " .. left_commit .. ".." .. right_commit
