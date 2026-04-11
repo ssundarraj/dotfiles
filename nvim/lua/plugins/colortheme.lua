@@ -29,7 +29,6 @@ M.plugins = {
 					},
 				},
 				override = function(colors)
-					require("monokai-pro.theme.plugins.bufferline").setup_bufferline_icon("DevIconDefault")
 					return {
 						-- Make winbar bg the same as buffer bg
 						WinBar = { fg = colors.base.dimmed1, bg = colors.base.background },
