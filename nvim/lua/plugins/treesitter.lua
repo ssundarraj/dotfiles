@@ -10,6 +10,7 @@ return {
 			require("nvim-treesitter").install({
 				"bash",
 				"c",
+				"cpp",
 				"diff",
 				"html",
 				"javascript",
