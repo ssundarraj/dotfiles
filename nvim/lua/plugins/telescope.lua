@@ -98,7 +98,7 @@ return { -- Fuzzy Finder (files, lsp, etc)tele
 		local putils = require("telescope.previewers.utils")
 
 		local function project_files()
-			local success = pcall(require("telescope.builtin").git_files)
+			local success = pcall(require("telescope.builtin").git_files, { show_untracked = true })
 			if not success then
 				require("telescope.builtin").find_files()
 			end
