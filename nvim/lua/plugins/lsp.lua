@@ -191,6 +191,21 @@ return {
 					"--header-insertion=iwyu",
 				},
 			},
+			rust_analyzer = {
+				settings = {
+					["rust-analyzer"] = {
+						cargo = {
+							allFeatures = true,
+						},
+						check = {
+							command = "clippy",
+						},
+						procMacro = {
+							enable = true,
+						},
+					},
+				},
+			},
 			bashls = {},
 			pyright = {},
 			gopls = {},

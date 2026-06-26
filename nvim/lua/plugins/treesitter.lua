@@ -19,6 +19,8 @@ return {
 				"markdown",
 				"markdown_inline",
 				"query",
+				"ron",
+				"rust",
 				"typescript",
 				"vim",
 				"vimdoc",
