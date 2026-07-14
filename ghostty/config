@@ -1,7 +1,10 @@
 font-family = "Meslo LG M DZ"
 cursor-style = block
+custom-shader = shaders/cursor_smear.glsl
+custom-shader-animation = true
 shell-integration-features = no-cursor,ssh-terminfo,ssh-env
 keybind = cmd+backspace=esc:w
 keybind = cmd+backspace=text:\x15
 theme = "Monokai Pro Machine"
 keybind = shift+enter=text:\n
+bell-features = system
