@@ -1,4 +1,24 @@
-alias ta='tmux attach'
+# Attach to a tmux session, or switch the current tmux client to it.
+ta() {
+  local session_name=$1
+
+  if [[ -n $TMUX ]]; then
+    if [[ -z $session_name ]]; then
+      print -u2 'Usage: ta <session-name>'
+      return 1
+    fi
+    tmux switch-client -t "$session_name"
+  elif [[ -n $session_name ]]; then
+    tmux attach -t "$session_name"
+  else
+    tmux attach
+  fi
+}
+
+# Switch/create a Worktrunk worktree, then enter its tmux session.
+wtn() {
+  wt switch "$@" && wt attach
+}
 
 # Fuzzy tmux session attach/switch.
 tf() {

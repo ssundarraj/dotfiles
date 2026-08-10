@@ -14,6 +14,22 @@ Symlink Ghostty config
 
 `ln -s ~/dev/dotfiles/ghostty ~/.config/ghostty`
 
+Symlink Worktrunk config
+
+`mkdir -p ~/.config/worktrunk`
+
+`ln -s ~/dev/dotfiles/worktrunk/config.toml ~/.config/worktrunk/config.toml`
+
+Install Workmux
+
+`brew install raine/workmux/workmux`
+
+Symlink Workmux config
+
+`mkdir -p ~/.config/workmux`
+
+`ln -s ~/dev/dotfiles/workmux/config.yaml ~/.config/workmux/config.yaml`
+
 Global Git Ignore
 
 Located at `~/.config/git/ignore`. Currently just copied manually from `./.gitignore`.
