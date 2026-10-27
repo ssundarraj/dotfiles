@@ -14,6 +14,12 @@ Symlink Ghostty config
 
 `ln -s ~/dev/dotfiles/ghostty ~/.config/ghostty`
 
+Symlink tmux config
+
+`mkdir -p ~/.config/tmux`
+
+`ln -sf ~/dev/dotfiles/tmux/tmux.conf ~/.config/tmux/tmux.conf`
+
 Symlink Worktrunk config
 
 `mkdir -p ~/.config/worktrunk`
