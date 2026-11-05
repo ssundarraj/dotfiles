@@ -13,6 +13,10 @@ rex.bind(PREFIX .. ">j", "pane.focus.down")
 rex.bind(PREFIX .. ">k", "pane.focus.up")
 rex.bind(PREFIX .. ">l", "pane.focus.right")
 
+-- Split vertically (side by side) or horizontally (stacked).
+rex.bind(PREFIX .. ">v", "pane.split.right")
+rex.bind(PREFIX .. ">-", "pane.split.down")
+
 -- Cycle tabs and open the session picker with the same prefix.
 rex.bind(PREFIX .. ">" .. PREFIX, "client.tab.next")
 rex.bind(PREFIX .. ">s", "session.switch")
